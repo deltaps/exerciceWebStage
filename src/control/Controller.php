@@ -55,5 +55,10 @@ class Controller{
             $this->view->makeWelcomPage();
         }
     }
+    public function sendContact($data){
+        if($data != null){
+
+        }
+    }
 
 }

@@ -25,6 +25,9 @@ class Router{
         elseif(array_key_exists("contact",$_GET)){
             $affiche->makeContactPage();
         }
+        elseif(array_key_exists("contactSend",$_GET)){
+            $controller->sendContact($_POST);
+        }
         else {
             $controller->showWelcomPage();
         }
