@@ -29,6 +29,11 @@ li a{
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
+@media (max-width: 600px) {
+    .queris{
+        display: unset;
+    }
+}
 article{
     margin-top:2em;
     margin-bottom: 2em;
