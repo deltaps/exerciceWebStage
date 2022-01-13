@@ -3,10 +3,10 @@ include_once 'view/View.php';
 include_once 'control/Controller.php';
 class Router{
 
-    public function main($accountStorage){
+    public function main($accountStorage,$bd){
         session_start();
         $affiche = new View($this);
-        $controller = new Controller($affiche,$accountStorage);
+        $controller = new Controller($affiche,$accountStorage,$bd);
         if(array_key_exists("login",$_GET)){
             $controller->makeLoginFormPage();
         }
@@ -23,7 +23,7 @@ class Router{
             $controller->creationAccount($_POST);
         }
         elseif(array_key_exists("contact",$_GET)){
-            $affiche->makeContactPage();
+            $affiche->makeContactPage("");
         }
         elseif(array_key_exists("contactSend",$_GET)){
             $controller->sendContact($_POST);

@@ -3,10 +3,12 @@ include_once 'model/AccountStorageMySQL.php';
 class Controller{
     protected $view;
     protected $accountStorage;
+    protected $bd;
 
-    public function __construct($view,$accountStorage){
+    public function __construct($view,$accountStorage,$bd){
         $this->view = $view;
         $this->accountStorage = $accountStorage;
+        $this->bd = $bd;
     }
 
     public function showWelcomPage(){
@@ -57,7 +59,12 @@ class Controller{
     }
     public function sendContact($data){
         if($data != null){
-
+            //TODO requête préparé pour ajouter les info pour le contact
+            $requete = "INSERT INTO contact VALUES (:nom,:prenom,:mail,:sujet,:texte)";
+            $stmt = $this->bd->prepare($requete);
+            $newData = array(':nom' => $data["name"], ':prenom' => $data["firstname"], ':mail' => $data["email"], ':sujet' => $data["subject"],':texte' => $data["message"]);
+            $stmt->execute($newData);
+            $this->view->makeWelcomPage();
         }
     }
 

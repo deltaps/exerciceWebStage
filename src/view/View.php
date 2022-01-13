@@ -129,9 +129,9 @@ class View{
     public function makeContactPage($error){
         $this->title = "Contact";
         //TODO Gestion d'erreur lors de la création de message pour le contact (faire en sorte qu'on ai pas a réécrire le message etc...)
-        if($error != ""){
-
-        }
+        //if($error != ""){
+//
+  //      }
         $this->content = "<form method='POST' action=". $this->router->getContactSend().">
             <div>
                 <label class='required' for='name'>Nom :</label><br/>
