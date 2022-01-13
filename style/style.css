@@ -1,0 +1,48 @@
+body {
+    max-width: 1000px;
+    font-family: sans-serif;
+    margin: auto;
+}
+nav {
+    background-color: grey;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.menu{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-left: 9em;
+}
+ul li{
+    list-style-type: none;
+}
+li a{
+    margin: 0.2em;
+    color: white;
+    text-decoration: none;
+}
+
+.queris{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+article{
+    margin-top:2em;
+    margin-bottom: 2em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    background-color: rgb(94, 94, 94);
+}
+
+article:nth-child(2n+1){
+    background-color: rgb(203, 203, 203);
+}
+footer{
+    background-color: grey;
+    padding: 1em;
+    text-align: center;
+    color: white;
+}

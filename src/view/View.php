@@ -16,6 +16,7 @@ class View{
         <!doctype html>
         <html lang=\"fr\">
             <head>
+              <link rel='stylesheet' media='screen' type='text/css' href='style/style.css'/>
               <meta charset=\"utf-8\">
               <title>". $this->title ."</title>
             </head>
@@ -52,20 +53,20 @@ class View{
                 <hr>
                 <footer>
                     <span>Copyright © 2021 Mon-super-site.fr</span>
-                    <p class='foot'>Site réalisé par Pronost Sacha</p>
                 </footer>
             </body>
         </html>
         ");
     }
 
-    public function makeWelcomPage(){
+    public function makeWelcomPage($text){
         $this->title = "Accueil";
-        $this->content = "<section>
-        <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus doloribus architecto quod ex aliquam placeat inventore amet pariatur voluptatibus quisquam dolorum et beatae cupiditate, fugiat ipsa enim. Voluptatum, consequuntur accusamus.</article>
-        <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus doloribus architecto quod ex aliquam placeat inventore amet pariatur voluptatibus quisquam dolorum et beatae cupiditate, fugiat ipsa enim. Voluptatum, consequuntur accusamus.</article>
-        <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus doloribus architecto quod ex aliquam placeat inventore amet pariatur voluptatibus quisquam dolorum et beatae cupiditate, fugiat ipsa enim. Voluptatum, consequuntur accusamus.</article>
-        <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus doloribus architecto quod ex aliquam placeat inventore amet pariatur voluptatibus quisquam dolorum et beatae cupiditate, fugiat ipsa enim. Voluptatum, consequuntur accusamus.</article>
+        $this->content = "<p> " . $text . "</p>
+        <section class='queris'>
+            <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus doloribus architecto quod ex aliquam placeat inventore amet pariatur voluptatibus quisquam dolorum et beatae cupiditate, fugiat ipsa enim. Voluptatum, consequuntur accusamus.</article>
+            <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus doloribus architecto quod ex aliquam placeat inventore amet pariatur voluptatibus quisquam dolorum et beatae cupiditate, fugiat ipsa enim. Voluptatum, consequuntur accusamus.</article>
+            <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus doloribus architecto quod ex aliquam placeat inventore amet pariatur voluptatibus quisquam dolorum et beatae cupiditate, fugiat ipsa enim. Voluptatum, consequuntur accusamus.</article>
+            <article>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus doloribus architecto quod ex aliquam placeat inventore amet pariatur voluptatibus quisquam dolorum et beatae cupiditate, fugiat ipsa enim. Voluptatum, consequuntur accusamus.</article>
         </section>";
         $this->render();
     }
@@ -126,13 +127,11 @@ class View{
         }
         $this->render();
     }
-    public function makeContactPage($error){
+    public function makeContactPage($error,$data){
         $this->title = "Contact";
         //TODO Gestion d'erreur lors de la création de message pour le contact (faire en sorte qu'on ai pas a réécrire le message etc...)
-        //if($error != ""){
-//
-  //      }
-        $this->content = "<form method='POST' action=". $this->router->getContactSend().">
+        if($error == ""){
+            $this->content = "<form method='POST' action=". $this->router->getContactSend().">
             <div>
                 <label class='required' for='name'>Nom :</label><br/>
                 <input type='text' id='name' name='name'>
@@ -157,6 +156,41 @@ class View{
               <button type='submit'>Envoyer </button>
             </div>
             </form>";
+        }
+        else{
+            $this->content = "<form method='POST' action=". $this->router->getContactSend().">
+            <p>Il y a une ou plusieurs erreurs</p>
+            <div>
+                <label class='required' for='name'>Nom :</label><br/>
+                <input type='text' id='name' name='name' value=" . $data["name"] . ">
+                " . $error['nom'] . "
+            </div>
+            <div>
+                <label class='required' for='firstname'>Prénom :</label><br/>
+                <input type='text' id='firstname' name='firstname' value=" . $data["firstname"] . ">
+                " . $error['prenom'] . "
+            </div>
+            <div>
+                <label class='required' for='email'>Adresse mail :</label><br/>
+                <input type='text' id='email' name='email' value=" . $data["email"] . ">
+                " . $error['mail'] . "
+            </div>
+            <div>
+                <label class='required' for='subject'>Sujet :</label><br/>
+                <input type='text' id='subject' name='subject' value=" . $data["subject"] . ">
+                " . $error['sujet'] . "
+            </div>
+            <div>
+                <label class='required' for='message'>Message :</label><br/>
+                <textarea id='message' class='input' name='message' row='7' cols='30'>" . $data["message"] . "</textarea>
+                " . $error['text'] . "
+            </div>
+            <div>
+              <button type='submit'>Envoyer </button>
+            </div>
+            </form>";
+        }
+
         $this->render();
     }
 

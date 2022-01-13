@@ -12,7 +12,7 @@ class Controller{
     }
 
     public function showWelcomPage(){
-        $this->view->makeWelcomPage();
+        $this->view->makeWelcomPage("");
     }
     public function makeLoginFormPage(){
         $this->view->makeLoginFormPage();
@@ -59,12 +59,38 @@ class Controller{
     }
     public function sendContact($data){
         if($data != null){
-            //TODO requête préparé pour ajouter les info pour le contact
-            $requete = "INSERT INTO contact VALUES (:nom,:prenom,:mail,:sujet,:texte)";
-            $stmt = $this->bd->prepare($requete);
-            $newData = array(':nom' => $data["name"], ':prenom' => $data["firstname"], ':mail' => $data["email"], ':sujet' => $data["subject"],':texte' => $data["message"]);
-            $stmt->execute($newData);
-            $this->view->makeWelcomPage();
+            $error = array('nom' => '', 'prenom' => '' , 'mail' => '', 'sujet' => '', 'text' => '');
+            $inerror = false;
+            if($data["name"] === ""){
+                $error['nom'] = "Un nom est obligatoire";
+                $inerror = true;
+            }
+            if($data["firstname"] === ""){
+                $error['prenom'] = "Un prenom est obligatoire";
+                $inerror = true;
+            }
+            if($data["email"] === ""){
+                $error['mail'] = "Une adresse mail est obligatoire";
+                $inerror = true;
+            }
+            if($data["subject"] === ""){
+                $error['sujet'] = "Un sujet est obligatoire";
+                $inerror = true;
+            }
+            if($data["message"] === ""){
+                $error['text'] = "Un message est obligatoire";
+                $inerror = true;
+            }
+            if($inerror){
+                $this->view->makeContactPage($error,$data);
+            }
+            else{
+                $requete = "INSERT INTO contact VALUES (:nom,:prenom,:mail,:sujet,:texte)";
+                $stmt = $this->bd->prepare($requete);
+                $newData = array(':nom' => $data["name"], ':prenom' => $data["firstname"], ':mail' => $data["email"], ':sujet' => $data["subject"],':texte' => $data["message"]);
+                $stmt->execute($newData);
+                $this->view->makeWelcomPage("Message envoyé!");
+            }
         }
     }
 
