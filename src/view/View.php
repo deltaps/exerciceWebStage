@@ -8,7 +8,7 @@ class View{
 
     public function __construct($router){
         $this->router = $router;
-        $this->menu = array('connexion' => $this->router->getLogin(), 'deconnexion' => $this->router->getDisconnectUser(), 'inscription' => $this->router->getCreationAccount(), 'contact' => $this->router->getContactPage());
+        $this->menu = array('Connexion' => $this->router->getLogin(), 'Deconnexion' => $this->router->getDisconnectUser(), 'Inscription' => $this->router->getCreationAccount(), 'Contact' => $this->router->getContactPage());
     }
 
     public function render(){
@@ -22,20 +22,20 @@ class View{
             </head>
             <body>
                 <nav>
-                    <h1>MON SUPER SITE</h1>
+                    <h1><a href='/'>MON SUPER SITE</a></h1>
                     <ul class='menu'>
                         ");
         foreach ($this->menu as $key => $value) {
             if(empty($_SESSION['user'])){
-                if($key === "deconnexion"){
+                if($key === "Deconnexion"){
                     continue;
                 }
             }
             else{
-                if($key === 'connexion'){
+                if($key === 'Connexion'){
                     continue;
                 }
-                if($key === "inscription"){
+                if($key === "Inscription"){
                     continue;
                 }
             }

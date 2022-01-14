@@ -20,19 +20,19 @@ class Controller{
     public function login($data){
         if($data != null){
             if($this->accountStorage->checkAuth($data['login'],$data['password'])){
-                $this->view->makeWelcomPage();
+                $this->view->makeWelcomPage("");
             }
             else{
                 $this->view->makeLoginErrorPage("Erreur, votre login ou passsword est incorect");
             }
         }
         else{
-            $this->view->makeWelcomPage();
+            $this->view->makeWelcomPage("");
         }
     }
     public function disconnection(){
         $this->accountStorage->disconnect();
-        $this->view->makeWelcomPage();
+        $this->view->makeWelcomPage("");
     }
     public function creationAccount($data){
         if($data != null){
@@ -54,7 +54,7 @@ class Controller{
             }
         }
         else{
-            $this->view->makeWelcomPage();
+            $this->view->makeWelcomPage("");
         }
     }
     public function sendContact($data){
