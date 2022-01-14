@@ -42,7 +42,7 @@ class View{
             echo("<li>
                            <a href='" . $value . "'>". $key . "</a>
                         </li>
-                        "); // Je ne comprend pas pourquoi, mais c'est le seule moyen de faire une belle indentation dans le code source de la page
+                        ");
         }
         echo("</ul>
                 </nav>

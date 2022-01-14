@@ -6,4 +6,3 @@
 # Travail réalisé par PRONOST Sacha
 
 # Afin de lancer le site internet, il vous suffit (en ayant tout configurer) de lancer le site en localhost.
-# Pour cela vous pouvez par exemple lancer la commande php -S localhost:8000 dans le dossier racine du site.
